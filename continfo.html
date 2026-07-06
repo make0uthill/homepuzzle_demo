@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rólunk / Kapcsolat | Home Puzzle Kft.</title>
+    <meta
+      name="description"
+      content="Ismerje meg a Home Puzzle Kft.-t: vagyonértékelés, ingatlanközvetítés és energetikai tanúsítvány egy helyen. Vegye fel velünk a kapcsolatot!"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      /* Mentett sötét téma visszaállítása még a renderelés előtt (nincs villanás) */
+      (function () {
+        try {
+          if (localStorage.getItem("hp-theme") === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="css/shared.css" />
+    <link rel="stylesheet" href="css/contact-info.css" />
+    <link rel="icon" type="image/png" href="assets/favicon/favicon-16x16.png" />
+  </head>
+  <body class="contact-page">
+    <button
+      class="theme-toggle"
+      id="theme-toggle"
+      type="button"
+      aria-label="Sötét és világos mód váltása"
+    >
+      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2" />
+        <path d="M12 20v2" />
+        <path d="m4.9 4.9 1.4 1.4" />
+        <path d="m17.7 17.7 1.4 1.4" />
+        <path d="M2 12h2" />
+        <path d="M20 12h2" />
+        <path d="m6.3 17.7-1.4 1.4" />
+        <path d="m19.1 4.9-1.4 1.4" />
+      </svg>
+    </button>
+    <main class="landing" aria-label="Rólunk és kapcsolat">
+      <section class="contact-panel" aria-label="Bemutatkozás és kapcsolatfelvétel">
+        <aside class="panel-side">
+          <a
+            class="brand"
+            href="index.html"
+            aria-label="Vissza a főoldalra"
+          >
+            <img src="assets/scraper-logo.png" alt="Home Puzzle Kft. logó" class="logo" />
+            <span>
+              <strong>Home Puzzle Kft.</strong>
+              <small>Ingatlanadásvétel és értékbecslés</small>
+            </span>
+          </a>
+
+          <div class="side-body">
+            <p class="side-kicker">Bemutatkozás</p>
+            <h1>Minden ingatlanügy egy helyen.</h1>
+            <p class="side-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <p class="side-text">
+              Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+              cupidatat non proident.
+            </p>
+            <ul class="side-list" aria-label="Kiemelések">
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="m8.5 12 2.5 2.5 4.5-5" />
+                </svg>
+                Személyre szabott tanácsadás
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="m8.5 12 2.5 2.5 4.5-5" />
+                </svg>
+                Piacismeret és pontos értékmeghatározás
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="m8.5 12 2.5 2.5 4.5-5" />
+                </svg>
+                Végigkísért ügyintézési folyamat
+              </li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="panel-form">
+          <p class="form-kicker">Kapcsolat</p>
+          <h2>Írjon nekünk!</h2>
+          <p class="form-lead">
+            Töltse ki az űrlapot, és rövid időn belül felvesszük Önnel a
+            kapcsolatot.
+          </p>
+          <form action="#" method="post">
+            <div class="form-row">
+              <label>
+                Név
+                <input type="text" name="nev" placeholder="Teljes név" required />
+              </label>
+              <label>
+                Telefonszám
+                <input type="tel" name="telefon" placeholder="+36 ..." />
+              </label>
+            </div>
+            <label>
+              E-mail
+              <input
+                type="email"
+                name="email"
+                placeholder="pelda@email.hu"
+                required
+              />
+            </label>
+            <label>
+              Üzenet
+              <textarea
+                name="uzenet"
+                placeholder="Miben segíthetünk?"
+                required
+              ></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">
+              Üzenet küldése <span aria-hidden="true">&rarr;</span>
+            </button>
+          </form>
+
+          <div class="form-contacts" aria-label="Közvetlen elérhetőségek">
+            <p>Vagy keressen minket közvetlenül:</p>
+            <div class="contact-links">
+              <a href="tel:+36704114644">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M13.8 16.6a1 1 0 0 0 1.2-.3l.4-.5A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.5.4a1 1 0 0 0-.3 1.2 14 14 0 0 0 6.4 6.4" />
+                </svg>
+                +36 70 411 4644
+              </a>
+              <a href="mailto:kerepesi.homepuzzle@gmail.com">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect width="20" height="16" x="2" y="4" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+                kerepesi.homepuzzle@gmail.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <p class="landing-footer">© 2025 Home Puzzle Kft. Minden jog fenntartva.</p>
+    </main>
+    <script src="js/theme-toggle.js"></script>
+  </body>
+</html>
