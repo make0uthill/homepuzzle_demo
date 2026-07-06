@@ -1,0 +1,597 @@
+/* ******** Base section ******** */
+:root {
+  --accent: #9e2f28;
+  --accent-dark: #6f211c;
+  --accent-light: #c94a40;
+  --soft: #fff3f2;
+  --copper: #b8493f;
+  --ink: #171425;
+  --muted: #635f73;
+  --line: #ead8d6;
+  --shadow: 0 20px 54px rgba(70, 22, 18, 0.12);
+  --shadow-strong: 0 32px 80px rgba(70, 22, 18, 0.24);
+}
+
+/*
+ * Sötét mód — a html[data-theme="dark"] attribútumot a jobb felső sarok
+ * kapcsolója állítja (js/theme-toggle.js), a választás localStorage-ban
+ * marad meg (kulcs: hp-theme), így oldalak között is megőrződik.
+ * A tokenből dolgozó szabályokat ez a blokk fedi le, a beégetett világos
+ * színeket a fájl végi felülíró szekció.
+ */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --accent: #c9554a;
+  --accent-dark: #a33d33;
+  --accent-light: #e0796c;
+  --soft: #2c1f1e;
+  --copper: #d98b80;
+  --ink: #f1ecee;
+  --muted: #b9aeb2;
+  --line: #3d3134;
+  --shadow: 0 20px 54px rgba(0, 0, 0, 0.45);
+  --shadow-strong: 0 32px 80px rgba(0, 0, 0, 0.6);
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  color: var(--ink);
+  background: linear-gradient(160deg, #fff8f7 0%, #fdeeec 55%, #fff8f7 100%);
+}
+
+/* Átlós vonalminta — a többi oldal háttérmintáinak párja */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(158, 47, 40, 0.09) 0,
+    rgba(158, 47, 40, 0.09) 1px,
+    transparent 1px,
+    transparent 24px
+  );
+  pointer-events: none;
+}
+
+a {
+  color: inherit;
+}
+
+svg {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ******** Landing layout ******** */
+.landing {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.55rem, 1.4vh, 1rem);
+  padding: clamp(0.8rem, 2vh, 1.6rem) clamp(1rem, 3vw, 2.2rem);
+}
+
+/* Lassan sodródó, elmosott accent fényfoltok a kártya mögött */
+.landing::before,
+.landing::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  width: clamp(300px, 40vw, 520px);
+  height: clamp(300px, 40vw, 520px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 74, 64, 0.2), transparent 65%);
+  filter: blur(12px);
+  animation: drift 16s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.landing::before {
+  top: -8rem;
+  left: -6rem;
+}
+
+.landing::after {
+  bottom: -10rem;
+  right: -7rem;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes drift {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(3.5rem, 2.5rem) scale(1.12);
+  }
+}
+
+/* ******** Contact panel card ******** */
+.contact-panel {
+  width: min(1060px, 100%);
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) minmax(0, 1fr);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: var(--shadow-strong);
+  overflow: hidden;
+  animation: card-in 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ******** Left: brand + intro side ******** */
+.panel-side {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.9rem, 2.2vh, 1.7rem);
+  padding: clamp(1.1rem, 2.6vh, 1.9rem) clamp(1.4rem, 3.2vw, 2.2rem);
+  color: #ffffff;
+  background:
+    linear-gradient(160deg, rgba(58, 15, 13, 0.94), rgba(111, 33, 28, 0.9) 55%, rgba(158, 47, 40, 0.86)),
+    url("../assets/contact.jpg") center / cover no-repeat;
+}
+
+/*
+ * backwards fill: a késleltetés alatt rejtve, de az animáció végén nem
+ * ragad be a transform — így a brand hover skálázása is működik.
+ */
+.panel-side > *,
+.panel-form > * {
+  animation: rise-fade 850ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.panel-side > *:nth-child(1) { animation-delay: 220ms; }
+.panel-side > *:nth-child(2) { animation-delay: 320ms; }
+.panel-form > *:nth-child(1) { animation-delay: 320ms; }
+.panel-form > *:nth-child(2) { animation-delay: 400ms; }
+.panel-form > *:nth-child(3) { animation-delay: 480ms; }
+.panel-form > *:nth-child(4) { animation-delay: 560ms; }
+.panel-form > *:nth-child(5) { animation-delay: 640ms; }
+
+@keyframes rise-fade {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: fit-content;
+  text-decoration: none;
+  transform-origin: left center;
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand:hover,
+.brand:focus-visible {
+  transform: scale(1.035);
+  outline: none;
+}
+
+.brand .logo {
+  width: clamp(3.2rem, 4.5vw, 4.2rem);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+}
+
+.brand strong {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.brand small {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.73rem;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.side-kicker,
+.form-kicker {
+  margin: 0;
+  color: #f0b5af;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.panel-side h1 {
+  margin: 0.55rem 0 0;
+  font-size: clamp(1.6rem, 2.9vw, 2.3rem);
+  font-weight: 900;
+  line-height: 1.06;
+  letter-spacing: 0;
+  text-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.side-text {
+  margin: 0.8rem 0 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.95rem;
+  line-height: 1.62;
+}
+
+.side-text + .side-text {
+  margin-top: 0.6rem;
+}
+
+.side-list {
+  display: grid;
+  gap: clamp(0.35rem, 0.9vh, 0.55rem);
+  margin: 0.95rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.side-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.side-list svg {
+  flex: 0 0 auto;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: #f0b5af;
+}
+
+.side-body {
+  margin-block: auto;
+}
+
+/* ******** Right: contact form ******** */
+.panel-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.1rem, 2.6vh, 1.9rem) clamp(1.4rem, 3.2vw, 2.2rem);
+}
+
+.form-kicker {
+  color: var(--copper);
+}
+
+.panel-form h2 {
+  margin: 0.5rem 0 0;
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 900;
+  line-height: 1.08;
+}
+
+.form-lead {
+  margin: 0.55rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.panel-form form {
+  display: grid;
+  gap: clamp(0.5rem, 1.3vh, 0.8rem);
+  margin-top: clamp(0.7rem, 1.8vh, 1.2rem);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.panel-form label {
+  display: grid;
+  gap: 0.34rem;
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.panel-form input,
+.panel-form textarea {
+  width: 100%;
+  padding: clamp(0.5rem, 1.2vh, 0.68rem) 0.78rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fffdfd;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 400;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    background-color 200ms ease;
+}
+
+.panel-form textarea {
+  min-height: clamp(60px, 10vh, 110px);
+  resize: vertical;
+}
+
+.panel-form input::placeholder,
+.panel-form textarea::placeholder {
+  color: #a89ea9;
+}
+
+.panel-form input:hover,
+.panel-form textarea:hover {
+  border-color: rgba(158, 47, 40, 0.3);
+}
+
+.panel-form input:focus,
+.panel-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(158, 47, 40, 0.14);
+}
+
+.form-contacts {
+  margin-top: clamp(0.75rem, 1.8vh, 1.2rem);
+  padding-top: clamp(0.65rem, 1.6vh, 1rem);
+  border-top: 1px solid var(--line);
+}
+
+.form-contacts p {
+  margin: 0 0 0.55rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.48rem 0.72rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fffdfd;
+  color: var(--accent-dark);
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition:
+    transform 240ms ease,
+    background-color 240ms ease,
+    border-color 240ms ease;
+}
+
+.contact-links a:hover,
+.contact-links a:focus-visible {
+  transform: translateY(-2px);
+  background: var(--soft);
+  border-color: rgba(158, 47, 40, 0.32);
+  outline: none;
+}
+
+.contact-links svg {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  color: var(--accent);
+}
+
+/* ******** Button ******** */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: clamp(2.5rem, 5.4vh, 3rem);
+  padding: 0.7rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 900;
+  line-height: 1.1;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  justify-self: start;
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    background-color 200ms ease;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-110%) skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transition: transform 520ms ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  transform: scale(1.025);
+  outline: none;
+}
+
+.btn:hover::after,
+.btn:focus-visible::after {
+  transform: translateX(110%) skewX(-18deg);
+}
+
+.btn-primary {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  box-shadow: 0 18px 42px rgba(158, 47, 40, 0.34);
+}
+
+/* ******** Footer line ******** */
+.landing-footer {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  animation: rise-fade 850ms cubic-bezier(0.22, 1, 0.36, 1) 700ms both;
+}
+
+/* ******** Responsive section ******** */
+@media (max-width: 860px) {
+  .landing {
+    min-height: auto;
+    padding: clamp(0.9rem, 4vw, 1.6rem);
+  }
+
+  .contact-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-side {
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    width: 100%;
+    justify-self: stretch;
+  }
+}
+
+/* ******** Téma-kapcsoló gomb ******** */
+/* Az oldalnak nincs fejléce, ezért a kapcsoló fixen a jobb felső sarokban ül. */
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--accent-dark);
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(70, 22, 18, 0.14);
+  transition:
+    background-color 240ms ease,
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background: var(--soft);
+  transform: scale(1.035);
+  outline: none;
+}
+
+.theme-toggle .icon-sun {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle {
+  background: #211a1c;
+  color: #f1ecee;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
+}
+
+html[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+
+/* ******** Sötét mód felülírások ******** */
+/* A tokeneken kívüli, beégetett világos színű felületek sötét párja. */
+html[data-theme="dark"] body {
+  background: linear-gradient(160deg, #191316 0%, #171013 55%, #191316 100%);
+}
+
+html[data-theme="dark"] body::before {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(224, 121, 108, 0.07) 0,
+    rgba(224, 121, 108, 0.07) 1px,
+    transparent 1px,
+    transparent 24px
+  );
+}
+
+html[data-theme="dark"] .contact-panel {
+  background: #211a1c;
+}
+
+html[data-theme="dark"] .panel-form input,
+html[data-theme="dark"] .panel-form textarea {
+  background: #241d1f;
+}
+
+html[data-theme="dark"] .panel-form input::placeholder,
+html[data-theme="dark"] .panel-form textarea::placeholder {
+  color: #8d7f83;
+}
+
+html[data-theme="dark"] .panel-form input:focus,
+html[data-theme="dark"] .panel-form textarea:focus {
+  background: #2a2224;
+  box-shadow: 0 0 0 3px rgba(224, 121, 108, 0.16);
+}
+
+/* A sötét felületen a mély vörös linkszöveg nem olvasható, világosabb kell */
+html[data-theme="dark"] .contact-links a {
+  background: #241d1f;
+  color: #eda99e;
+}

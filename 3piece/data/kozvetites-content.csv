@@ -1,0 +1,10 @@
+type;order;title;text;items;image;alt;price;altalanos;muszaki;egyeb
+HERO;1;Ingatlan közvetítés;Segítünk az ingatlan gyors és megbízható értékesítésében. Piaci árazás, célzott hirdetés, előszűrt érdeklődők és teljes körű ügyintézési támogatás egy helyen.;;;;
+CHIP;1;;;Piaci árelemzés|Fotó + hirdetéskezelés|Tárgyalási támogatás;;;
+LIST_TITLE;1;Aktuálisan hirdetett ingatlanok;;;;;
+LISTING;1;Belvárosi lakás;2 szoba, 58 m2, erkélyes, jó közlekedéssel és felújított belső terekkel.;;assets/ingatlanok/belvarosilakas.jpg;Belvárosi lakás;Irányár: 59,9 M Ft
+LISTING;2;Családi ház kerttel;4 szoba, 128 m2, 620 m2 telek, csendes utcában, garázzsal.;;assets/ingatlanok/csaladihaz.jpg;Családi ház kerttel;Irányár: 94,5 M Ft
+LISTING;3;Luxusvilla panorámával;6 szoba, 310 m2, prémium kivitelezés, medence és dupla garázs.;;assets/ingatlanok/luxusvilla.jpg;Luxusvilla panorámával;Irányár: 289 M Ft
+LISTING;4;Sorházi lakás;3 szoba, 84 m2, saját terasz, alacsony rezsi és családbarát környezet.;;assets/ingatlanok/sorhaz.jpg;Sorházi lakás;Irányár: 72,0 M Ft
+LISTING;5;Építési telek;980 m2 telek, közművek az utcában, kiváló befektetési lehetőség.;;assets/ingatlanok/telek.jpg;Építési telek;Irányár: 34,8 M Ft
+LISTING;6;Mezőgazdasági ingatlan;Gazdálkodásra alkalmas terület, jó megközelíthetőséggel és infrastruktúrával.;;assets/ingatlanok/mezogazdasagi.jpg;Mezőgazdasági ingatlan;Irányár: 41,2 M Ft
